@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Dynamic Listview</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  
+    <!--JQM 1.1.0 version-->
+    <link rel="stylesheet" href="css/jquery-mobile-min.css"/>
+    <link rel="stylesheet" href="css/style.css" />
+    <!--JQuery 1.6.4 version-->    
+    <script type="text/javascript" src="js/jquery-min.js"></script>    
+    <script type="text/javascript" src="js/jquery-mobile-min.js"></script>
+
+    <script>
+      
+      function createListView(data) {
+
+        var movies = ["Superman", "Spiderman", "Batman", "Iron Man", "X-Men"];
+	
+          $.each(movies, function(index, movie) {
+	    $('#result-listview').append(
+	      '<li>'  +
+	        '<a href="" onclick="changePage(id_' + index + ');">' +
+				'<h3>' + movie + '</h3>' +
+			'</a>' +
+	      '</li>'
+	    );
+	    
+	    content = '<div data-role="page" id="id_' + index + '" data-url="id_' + index + '">' +
+			'<div data-role="header" data-add-back-btn="true">' +
+			  '<h1>' + movie + '</h1>' +
+			'</div>' +
+			'<div data-role="content">' +
+			  '<p>' +
+			    '<div data-role="fieldcontain" class="result">' +
+			    '</div>' +
+			  '</p>' +
+			'</div>' +
+		      '</div>';
+	    
+			$('body').append(content).trigger('create');
+			$(index).page();
+        });
+		
+	  $('#result-listview').listview('refresh');
+      }
+	  
+		function changePage(id){
+			$.mobile.changePage($(id), {transition : "slide"});
+		}
+
+    </script>
+	
+    <style>
+      
+    </style>
+
+</head>
+<body>
+			
+    <div data-role="page" id="home">
+	<div data-role="header" data-add-back-btn="true">                            <!-- This div with data-role is the header, shown in the black -->
+	  <h1>Dynamic Listview</h1>
+	</div> 
+
+	 <div data-role="content">
+
+	  <br/>
+	  <div class="result">
+	      <a href="#" data-role="button" data-inline="true" onclick="createListView();">Create Dynamic Listview</a>
+	  </div>
+	   
+	  <ul id="result-listview" class="listview" data-role="listview" data-theme="b">
+	  
+	  </ul>
+	   
+	</div>
+
+	<!--Footer starts here-->
+	<div data-role="footer" data-position="fixed">
+	   
+	</div>
+			
+	</div>  <!--main page end-->
+</body>
+</html>
