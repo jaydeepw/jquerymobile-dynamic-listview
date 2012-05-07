@@ -15,39 +15,56 @@
       
       function createListView(data) {
 
-        var movies = ["Superman", "Spiderman", "Batman", "Iron Man", "X-Men"];
+        var moviesData = ["Titanic", "Spiderman", "Toy Story 3", "Iron Man 2",
+        					"Terminator","Hackers", "Matrix"];
 	
-          $.each(movies, function(index, movie) {
-	    $('#result-listview').append(
-	      '<li>'  +
-	        '<a href="" onclick="changePage(id_' + index + ');">' +
-				'<h3>' + movie + '</h3>' +
-			'</a>' +
-	      '</li>'
-	    );
+          createListItem(moviesData);
+
+	    $.each(moviesData, function(index, movie) {
+
+		    $('#result-listview').append(
+		      '<li>'  +
+		        '<a href="" onclick="changePage(id_' + index + ');">' +
+					'<h3>' + movie + '</h3>' +
+				'</a>' +
+		      '</li>'
+		    );
+
+		    /*
+				Here we are dynamically creating a new page.
+				Do not forget to append this block of code
+				to the body tag. If appended mistakenly somewhere else,
+				the code wont work.
+		    */
+		    content = 	'<div data-role="page" id="id_' + index + '" data-url="id_' + index + '">' +
+							'<div data-role="header">' +
+							'<a href="#" data-rel="back" data-icon="back">Back</a>' +
+							  '<h1>' + movie + '</h1>' +
+							'</div>' +
+							'<div data-role="content">' +
+							  '<p>' +
+							    '<div data-role="fieldcontain" class="result">' +
+							    '</div>' +
+							  '</p>' +
+							'</div>' +
+					    '</div>';
 	    
-	    content = '<div data-role="page" id="id_' + index + '" data-url="id_' + index + '">' +
-			'<div data-role="header" data-add-back-btn="true">' +
-			  '<h1>' + movie + '</h1>' +
-			'</div>' +
-			'<div data-role="content">' +
-			  '<p>' +
-			    '<div data-role="fieldcontain" class="result">' +
-			    '</div>' +
-			  '</p>' +
-			'</div>' +
-		      '</div>';
-	    
+
 			$('body').append(content).trigger('create');
+
+			/*Tell JQM to enhance the page with the required classes.*/
 			$(index).page();
-        });
+
+        });// end for each
 		
 	  $('#result-listview').listview('refresh');
       }
-	  
-		function changePage(id){
-			$.mobile.changePage($(id), {transition : "slide"});
-		}
+
+	 /*This function helps is mapping each listitem to its correspondig 
+	 handler.*/ 
+	function changePage(id){
+		$.mobile.changePage($(id), {transition : "slide"});
+	}
 
     </script>
 	
@@ -65,14 +82,15 @@
 
 	 <div data-role="content">
 
-	  <br/>
-	  <div class="result">
-	      <a href="#" data-role="button" data-inline="true" onclick="createListView();">Create Dynamic Listview</a>
-	  </div>
-	   
-	  <ul id="result-listview" class="listview" data-role="listview" data-theme="b">
-	  
-	  </ul>
+		  <br/>
+		  <div class="result">
+		      <a href="#" data-role="button" data-inline="true" onclick="createListView();">Create Dynamic Listview</a>
+		  </div>
+		   
+		   <!-- This is where the result of dynamically created listitems will be appended. -->
+		  <ul id="result-listview" class="listview" data-role="listview" data-theme="b">
+		  
+		  </ul>
 	   
 	</div>
 
