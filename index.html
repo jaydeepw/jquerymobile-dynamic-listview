@@ -53,14 +53,14 @@
 			/*Tell JQM to enhance the page with the required classes.*/
 			$(index).page();
 
-        });// end for each
+        });	// end for each
 		
-	  $('#result-listview').listview('refresh');
+	  	$('#result-listview').listview('refresh');
       }
 
 	 /*This function helps is mapping each listitem to its correspondig 
 	 handler.*/ 
-	function changePage(id){
+	function changePage(id) {
 		$.mobile.changePage($(id), {transition : "slide"});
 	}
 
